@@ -11,7 +11,7 @@ export default function Home() {
     const navigation = useNavigation();
     const [profileInfo, setProfile] = useState({"profileInfo":{"imgurl":"https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png","totalBalance":20},
     "portfolio":[{"currency":"bitcoin","symbol":"BTC","amount":1000},{"currency":"ethereum","symbol":"ETH","amount":2000},{"currency":"xrp","symbol":"XRP","amount":7000},],
-    "tradeHistory":{"bids":[{"amount":1340,"user":"elonmusk#01","nft":"34532"},{"amount":1340,"user":"elonmusk#01","nft":"34532"}],"sales":[{"amount":11000,"user":"elonmusk#01","nft":"34532"},{"amount":1000,"user":"johndoe#01","nft":"34532"}],"purchases":[{"amount":1100,"nft":"34532"},{"amount":1400,"nft":"342432"}]}});
+    "tradeHistory":{"bids":[{"amount":1340,"user":"elonmusk#01","nft":"34532"},{"amount":1140,"user":"johndoe#01","nft":"34532"}],"sales":[{"amount":11000,"user":"elonmusk#01","nft":"34532"},{"amount":1000,"user":"johndoe#01","nft":"34532"}],"purchases":[{"amount":1100,"nft":"34532"},{"amount":1400,"nft":"342432"}]}});
 
 
     const portfolio = profileInfo.portfolio.map((data) => {
@@ -23,13 +23,16 @@ export default function Home() {
 
             </View>
         )});
-    const tradeHistory = profileInfo.portfolio.map((data) => {
+    const tradeHistory = profileInfo.tradeHistory.bids.map((data) => {
         return (
-            <View style={styles.coins}>
-            <Image source={{uri:`https://cryptologos.cc/logos/${data.currency}-${data.symbol.toLowerCase()}-logo.png?v=010`}} style={styles.coinLogo}></Image>
-            <Text style={styles.coinLabel}>{data.symbol}</Text>
-            <Text style={styles.coinAmount}>{data.amount}</Text>
-
+            <View style={styles.trades}>
+            <View style={styles.horizontal}>
+            <Image source={require('../assets/bid.png')} style={styles.coinLogo}></Image>
+            <View>
+            <Text style={styles.tradeTitle}>New bid for ${data.amount}</Text>
+            <Text style={styles.tradeSUb}>From {data.user} for your NFT #{data.nft}</Text>
+            </View>
+            </View>
             </View>
         )});
         
@@ -73,9 +76,9 @@ export default function Home() {
             <Text style={styles.title}>Trade History</Text>
             <Icon name="chevron-with-circle-right" type="entypo" color="#0553B9" size={20} style={{marginTop:'20%', marginLeft:'5%'}}></Icon>
             </View></TouchableOpacity>
-            <View style={styles.horizontal}>
-                <ScrollView horizontal={true} style={{overflow:'visible'}}>
-                {portfolio}
+            <View style={{height:'33.5%'}}>
+                <ScrollView style={{overflow:'hidden', paddingBottom:'5%'}}>
+                {tradeHistory}
                 </ScrollView>
             </View>
                
@@ -222,6 +225,35 @@ const styles = StyleSheet.create({
         fontWeight:'bold',
         fontSize:22,
         textAlign:'center',
+    },
+    trades: {
+        backgroundColor:"#FFF",
+        borderRadius:15,
+        paddingHorizontal:'5%',
+        paddingVertical:'5%',
+        alignContent:'center',
+        width:'90%',
+        marginHorizontal:10,
+        marginVertical:10,
+    },
+    tradeTitle: {
+        fontFamily:'Roboto',
+        color:"#0553B9",
+        fontWeight:'bold',
+        fontSize:18,
+        textAlign:'left',
+        flexWrap:'wrap',
+        marginLeft:'5%'
+    },
+    tradeSUb: {
+        fontFamily:'Roboto',
+        color:"#A6A9B4",
+        fontWeight:'bold',
+        fontSize:15,
+        textAlign:'left',
+        flexWrap:'wrap',
+        marginLeft:'5%',
+        width:'70%'
     },
 
 });
