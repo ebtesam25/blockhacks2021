@@ -1,1 +1,2 @@
-# blockchack2021
+# BlockHacks 2021
+# TeamZero
