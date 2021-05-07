@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
+import {Provider} from 'react-redux';
+import store from './src/store/store';
 
 import Home from './src/screens/home';
 import Trade from './src/screens/trade';
@@ -41,13 +42,16 @@ function MyStack() {
       
       
     </Stack.Navigator>
+    
   );
 }
 
 export default function App() {
   return (
+    <Provider store={store}>
     <NavigationContainer>
       <MyStack />
     </NavigationContainer>
+    </Provider>
   );
 }

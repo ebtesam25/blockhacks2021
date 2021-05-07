@@ -6,11 +6,14 @@ import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import DropDownPicker from 'react-native-dropdown-picker';
-
+import {useSelector, useDispatch} from 'react-redux'
+import {increment,decrement, lock, unlock} from '../store/action'
 
 
 export default function Wallet() {
     const navigation = useNavigation();
+    const balance = useSelector(state => state);
+    const dispatch = useDispatch();
     const [profileInfo, setProfile] = useState({"profileInfo":{"imgurl":"https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png","totalBalance":20},
     "portfolio":[{"currency":"bitcoin","symbol":"BTC","amount":1000},{"currency":"ethereum","symbol":"ETH","amount":2000},{"currency":"xrp","symbol":"XRP","amount":7000},],
     "tradeHistory":{"bids":[{"amount":1340,"user":"elonmusk#01","nft":"34532"},{"amount":1140,"user":"johndoe#01","nft":"34532"}],"sales":[{"amount":11000,"user":"elonmusk#01","nft":"34532"},{"amount":1000,"user":"johndoe#01","nft":"34532"}],"purchases":[{"amount":1100,"nft":"34532"},{"amount":1400,"nft":"342432"}]},
@@ -31,7 +34,7 @@ export default function Wallet() {
             <View style={styles.coins}>
             <Image source={{uri:`https://cryptologos.cc/logos/${data.currency}-${data.symbol.toLowerCase()}-logo.png?v=010`}} style={styles.coinLogo}></Image>
             <Text style={styles.coinLabel}>{data.symbol}</Text>
-            <Text style={styles.coinAmount}>{data.amount}</Text>
+            <Text style={styles.coinAmount}>{balance ? "LOCKED":data.amount}</Text>
 
             </View>
         )});
@@ -75,7 +78,10 @@ export default function Wallet() {
          
             <Text style={styles.title}>Total Balance</Text>
             <View style={styles.horizontal}>
-            <View style={styles.total}><Text style={{fontSize:20, color:"#FFF", fontWeight:'bold', textAlign:'center', textAlignVertical:'center', marginTop:'5%'}}>${profileInfo.profileInfo.totalBalance.toString()}</Text></View>
+            <View style={styles.total}><Text style={{fontSize:20, color:"#FFF", fontWeight:'bold', textAlign:'center', textAlignVertical:'center', marginTop:'5%'}}>${balance ? "*****" : profileInfo.profileInfo.totalBalance.toString()}</Text></View>
+            <TouchableOpacity onPress={()=>{ balance ? dispatch(lock()): dispatch(unlock())}}><View style={styles.btn}><Text style={{fontSize:20, color:"#FFF", fontWeight:'bold', textAlign:'center', textAlignVertical:'center', marginTop:'5%'}}>{balance ? "Unlock":"Lock"}</Text></View></TouchableOpacity>
+            </View>
+            <View style={{flexDirection:'row', marginTop:'5%'}}>
             <View style={{marginLeft:'5%'}}>
                 <Text style={styles.labeldrop}>Download statement for</Text>
                 <DropDownPicker
@@ -87,16 +93,16 @@ export default function Wallet() {
                 setOpen={setOpen}
                 placeholder="Select duration"
                 placeholderStyle={{fontWeight:'bold', color:"#0553B9"}}
-                style={{borderColor:"#FFF", height:40}}
+                style={{borderColor:"#FFF", height:40, width:275}}
                 labelStyle={{color:"#0553B9", fontWeight:'bold'}}
-                containerStyle={{height:50, width:'50%', borderColor:'#FFF', zIndex:3}}
+                containerStyle={{height:50, width:275, borderColor:'#FFF', zIndex:3}}
                 />
             </View>
-            <Icon name="download" type="feather" color="#0553B9" size={30}></Icon>
+            <TouchableOpacity><Icon name="download" type="feather" color="#0553B9" size={30} style={{marginTop:'50%', marginLeft:'5%'}}></Icon></TouchableOpacity>
             </View>
 
             <Text style={styles.title}>Recent Transactions</Text>
-            <View style={{height:'36.5%'}}>
+            <View style={{height:'27.5%'}}>
                 <ScrollView style={{overflow:'hidden', paddingBottom:'5%'}}>
                 {txHistory}
                 </ScrollView>
@@ -299,9 +305,20 @@ const styles = StyleSheet.create({
         borderRadius:20,
         paddingHorizontal:'5%',
         paddingVertical:'2.5%',
-        width:'40%',
-        height:60,
+        width:200,
+        height:50,
         alignContent:'center'
+    },
+    btn: {
+        backgroundColor:"#0553B9",
+        color:"#FFF",
+        borderRadius:20,
+        paddingHorizontal:'5%',
+        paddingVertical:'2.5%',
+        width:150,
+        height:50,
+        alignContent:'center',
+        marginLeft:'5%'
     }
 
 });
