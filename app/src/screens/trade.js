@@ -7,23 +7,15 @@ import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
 
-export default function Home() {
+export default function Trade() {
     const navigation = useNavigation();
     const [profileInfo, setProfile] = useState({"profileInfo":{"imgurl":"https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png","totalBalance":20},
     "portfolio":[{"currency":"bitcoin","symbol":"BTC","amount":1000},{"currency":"ethereum","symbol":"ETH","amount":2000},{"currency":"xrp","symbol":"XRP","amount":7000},],
     "tradeHistory":{"bids":[{"amount":1340,"user":"elonmusk#01","nft":"34532"},{"amount":1140,"user":"johndoe#01","nft":"34532"}],"sales":[{"amount":11000,"user":"elonmusk#01","nft":"34532"},{"amount":1000,"user":"johndoe#01","nft":"34532"}],"purchases":[{"amount":1100,"nft":"34532"},{"amount":1400,"nft":"342432"}]}});
 
 
-    const portfolio = profileInfo.portfolio.map((data) => {
-        return (
-            <View style={styles.coins}>
-            <Image source={{uri:`https://cryptologos.cc/logos/${data.currency}-${data.symbol.toLowerCase()}-logo.png?v=010`}} style={styles.coinLogo}></Image>
-            <Text style={styles.coinLabel}>{data.symbol}</Text>
-            <Text style={styles.coinAmount}>{data.amount}</Text>
-
-            </View>
-        )});
-    const tradeHistory = profileInfo.tradeHistory.bids.map((data) => {
+   
+    const bidHistory = profileInfo.tradeHistory.bids.map((data) => {
         return (
             <View style={styles.trades}>
             <View style={styles.horizontal}>
@@ -35,6 +27,31 @@ export default function Home() {
             </View>
             </View>
         )});
+        const sellHistory = profileInfo.tradeHistory.sales.map((data) => {
+            return (
+                <View style={styles.trades}>
+                <View style={styles.horizontal}>
+                <Image source={require('../assets/sold.png')} style={styles.coinLogo}></Image>
+                <View>
+                <Text style={styles.tradeTitle}>NFT sold for ${data.amount}</Text>
+                <Text style={styles.tradeSUb}>NFT #{data.nft} sold to {data.user}</Text>
+                </View>
+                </View>
+                </View>
+            )});
+
+        const purchaseHistory = profileInfo.tradeHistory.purchases.map((data) => {
+            return (
+                <View style={styles.trades}>
+                <View style={styles.horizontal}>
+                <Image source={require('../assets/sold.png')} style={styles.coinLogo}></Image>
+                <View>
+                <Text style={styles.tradeTitle}>NFT purchased for ${data.amount}</Text>
+                <Text style={styles.tradeSUb}>NFT ID #{data.nft}</Text>
+                </View>
+                </View>
+                </View>
+            )});
         
 
     
@@ -44,44 +61,38 @@ export default function Home() {
             
             <View style={styles.horizontal}>
                 <View>
-                <Text style={styles.title}>Balance</Text>
-                <Text style={styles.subtitle}>${profileInfo.profileInfo.totalBalance.toString()}</Text>
+                <Icon name="chevron-left" type="entypo" color="#0553B9"></Icon>
                 </View>
                 <Image style={styles.avatar} source={{uri:profileInfo.profileInfo.imgurl}}></Image>
             </View>
-            <View style={styles.horizontal}>
-            <View style={styles.create}>
-                <TouchableOpacity><View style={styles.horizontal}>
-                <Icon name="pluscircle" type="antdesign" color="#0553B9" style={{marginTop:'10%'}} size={40}></Icon>
-                    <Text style={styles.createlabel}>Create an NFT</Text>
-                </View></TouchableOpacity>
-            </View>
-            <View style={styles.create}>
-                <TouchableOpacity><View style={styles.horizontal}>
-                    <Icon name="shopping-basket-add" type="fontisto" color="#0553B9" size={30}></Icon>
-                    <Text style={styles.createlabel}>Sell existing NFT</Text>
-                </View></TouchableOpacity>
-            </View>
-            </View>
-            <TouchableOpacity><View style={styles.horizontal}>
-            <Text style={styles.title}>Wallet</Text>
-            <Icon name="chevron-with-circle-right" type="entypo" color="#0553B9" size={20} style={{marginTop:'20%', marginLeft:'5%'}}></Icon>
-            </View></TouchableOpacity>
-            <View style={styles.horizontal}>
-                <ScrollView horizontal={true} style={{overflow:'visible'}}>
-                {portfolio}
+       
+           <View style={{marginTop:'15%'}}></View>
+        
+            <Text style={styles.title}>Trade History</Text>
+            <View style={{height:'75%'}}>
+            <ScrollView style={{paddingBottom:'10%'}}>
+            <Text style={styles.titlesub}>Bids</Text>
+            <View style={{height:'30%'}}>
+                <ScrollView style={{overflow:'hidden', paddingBottom:'5%'}}>
+                {bidHistory}
                 </ScrollView>
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate('Trade')}><View style={styles.horizontal}>
-            <Text style={styles.title}>Trade History</Text>
-            <Icon name="chevron-with-circle-right" type="entypo" color="#0553B9" size={20} style={{marginTop:'20%', marginLeft:'5%'}}></Icon>
-            </View></TouchableOpacity>
+
+            <Text style={styles.titlesub}>Sales</Text>
+            <View style={{height:'30%'}}>
+                <ScrollView style={{overflow:'hidden', paddingBottom:'5%'}}>
+                {sellHistory}
+                </ScrollView>
+            </View>
+
+            <Text style={styles.titlesub}>Purchases</Text>
             <View style={{height:'33.5%'}}>
                 <ScrollView style={{overflow:'hidden', paddingBottom:'5%'}}>
-                {tradeHistory}
+                {purchaseHistory}
                 </ScrollView>
             </View>
-               
+            </ScrollView>
+            </View>     
         </View>
         <View style={styles.footer}>
                     <View style={{justifyContent:'space-between', flexDirection:'row'}}>
@@ -130,6 +141,16 @@ const styles = StyleSheet.create({
         fontSize:25,
         textAlign:'left',
         flexWrap:'wrap',
+    },
+    titlesub: {
+        fontFamily:'Roboto',
+        color:"#0553B9",
+        fontWeight:'bold',
+        fontSize:20,
+        textAlign:'left',
+        flexWrap:'wrap',
+        marginLeft:'5%',
+        marginTop:'2.5%'
     },
     subtitle: {
         fontFamily:'Roboto',

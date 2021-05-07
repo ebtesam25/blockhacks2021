@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 
 import Home from './src/screens/home';
+import Trade from './src/screens/trade';
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,11 @@ function MyStack() {
       <Stack.Screen 
         name="Home" 
         component={Home} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Trade" 
+        component={Trade} 
         options={{ headerShown: false}} 
       />
       
