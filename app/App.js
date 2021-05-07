@@ -8,6 +8,9 @@ import Home from './src/screens/home';
 import Trade from './src/screens/trade';
 import Wallet from './src/screens/wallet';
 import Discover from './src/screens/discover';
+import Nft from './src/screens/nft';
+import Purchase from './src/screens/purchase';
+import Purchased from './src/screens/purchased';
 
 const Stack = createStackNavigator();
 
@@ -36,6 +39,21 @@ function MyStack() {
       <Stack.Screen 
         name="Discover" 
         component={Discover} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Nft" 
+        component={Nft} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Purchase" 
+        component={Purchase} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Purchased" 
+        component={Purchased} 
         options={{ headerShown: false}} 
       />
       
