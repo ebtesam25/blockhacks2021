@@ -5,6 +5,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Home from './src/screens/home';
 import Trade from './src/screens/trade';
+import Wallet from './src/screens/wallet';
+import Discover from './src/screens/discover';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +27,17 @@ function MyStack() {
         component={Trade} 
         options={{ headerShown: false}} 
       />
+      <Stack.Screen 
+        name="Wallet" 
+        component={Wallet} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Discover" 
+        component={Discover} 
+        options={{ headerShown: false}} 
+      />
+      
       
       
     </Stack.Navigator>

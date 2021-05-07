@@ -5621,6 +5621,11 @@ react-native-communications@^2.2.1:
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
   integrity sha1-eIO1ayCgAu63kMET+GFuqGksp5U=
 
+react-native-dropdown-picker@^5.1.4:
+  version "5.1.4"
+  resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.1.4.tgz#eab64fe1741ed6e12ebc41821077d7a4e793b363"
+  integrity sha512-WdpNhkaIbVdElijVLyDIpVDc3D08rIoJlojbitdTJLIZVEqU4CaAvsf8GLt5EStYFMacY5GvTCFKH5G1CbHV0A==
+
 react-native-elements@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-3.4.1.tgz#74ea15a9369b05abf4f7421f0ce236ca01fedfe1"

@@ -85,22 +85,22 @@ export default function Home() {
         </View>
         <View style={styles.footer}>
                     <View style={{justifyContent:'space-between', flexDirection:'row'}}>
-                    <View>
+                    <TouchableOpacity onPress={()=>navigation.navigate('Home')}><View>
                     <Icon name="home" type="entypo" color="#0553B9"></Icon>
                     <Text style={styles.label}>Home</Text>
-                    </View>
-                    <View>
+                    </View></TouchableOpacity>
+                    <TouchableOpacity  onPress={()=>navigation.navigate('Wallet')}><View>
                     <Icon name="wallet" type="entypo" color="#A6A9B4"></Icon>
                     <Text style={styles.labelInactive}>Wallet</Text>
-                    </View>
-                    <View>
+                    </View></TouchableOpacity>
+                    <TouchableOpacity  onPress={()=>navigation.navigate('Discover')}><View>
                     <Icon name="search" type="feather" color="#A6A9B4"></Icon>
                     <Text style={styles.labelInactive}>Discover</Text>
-                    </View>
-                    <View>
+                    </View></TouchableOpacity>
+                    <TouchableOpacity  onPress={()=>navigation.navigate('Notifications')}><View>
                     <Icon name="notifications" type="ionicons" color="#A6A9B4"></Icon>
                     <Text style={styles.labelInactive}>Notifications</Text>
-                    </View>
+                    </View></TouchableOpacity>
                 </View>
             </View>  
         </View>
@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
         fontFamily:'Roboto',
         color:"#0553B9",
         fontWeight:'bold',
-        fontSize:15,
+        fontSize:12,
         textAlign:'center',
         flexWrap:'wrap',
     },
@@ -191,7 +191,7 @@ const styles = StyleSheet.create({
         fontFamily:'Roboto',
         color:"#A6A9B4",
         fontWeight:'bold',
-        fontSize:15,
+        fontSize:12,
         textAlign:'center',
         flexWrap:'wrap',
     },
@@ -201,8 +201,8 @@ const styles = StyleSheet.create({
         paddingHorizontal:'5%',
         paddingVertical:'5%',
         alignContent:'center',
-        width:150,
-        height:175,
+        width:125,
+        height:150,
         marginHorizontal:10,
         marginVertical:10,
     },

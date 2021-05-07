@@ -5,53 +5,48 @@ import Svg, { Line } from 'react-native-svg';
 import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
+import DropDownPicker from 'react-native-dropdown-picker';
 
 
-export default function Trade() {
+
+export default function Wallet() {
     const navigation = useNavigation();
     const [profileInfo, setProfile] = useState({"profileInfo":{"imgurl":"https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png","totalBalance":20},
     "portfolio":[{"currency":"bitcoin","symbol":"BTC","amount":1000},{"currency":"ethereum","symbol":"ETH","amount":2000},{"currency":"xrp","symbol":"XRP","amount":7000},],
-    "tradeHistory":{"bids":[{"amount":1340,"user":"elonmusk#01","nft":"34532"},{"amount":1140,"user":"johndoe#01","nft":"34532"}],"sales":[{"amount":11000,"user":"elonmusk#01","nft":"34532"},{"amount":1000,"user":"johndoe#01","nft":"34532"}],"purchases":[{"amount":1100,"nft":"34532"},{"amount":1400,"nft":"342432"}]}});
+    "tradeHistory":{"bids":[{"amount":1340,"user":"elonmusk#01","nft":"34532"},{"amount":1140,"user":"johndoe#01","nft":"34532"}],"sales":[{"amount":11000,"user":"elonmusk#01","nft":"34532"},{"amount":1000,"user":"johndoe#01","nft":"34532"}],"purchases":[{"amount":1100,"nft":"34532"},{"amount":1400,"nft":"342432"}]},
+    "txHistory":[{"timestamp":"05/07/2021","amount":-230},{"timestamp":"05/07/2021","amount":-230,"acc":"ABC123"},{"timestamp":"05/07/2021","amount":1000,"acc":"XYZ123"},{"timestamp":"05/07/2021","amount":140,"acc":"0xA123"},{"timestamp":"05/07/2021","amount":-20,"acc":"A123001"}]});
+
+    const [open, setOpen] = useState(false);
+    const [value, setValue] = useState(null);
+    const [items, setItems] = useState([
+        {label: 'Past week', value: 7},
+        {label: 'Past month', value: 30},
+        {label: 'Past year', value: 365},
+        {label: 'Entire history', value: 999},
+      ]);
 
 
-   
-    const bidHistory = profileInfo.tradeHistory.bids.map((data) => {
+    const portfolio = profileInfo.portfolio.map((data) => {
+        return (
+            <View style={styles.coins}>
+            <Image source={{uri:`https://cryptologos.cc/logos/${data.currency}-${data.symbol.toLowerCase()}-logo.png?v=010`}} style={styles.coinLogo}></Image>
+            <Text style={styles.coinLabel}>{data.symbol}</Text>
+            <Text style={styles.coinAmount}>{data.amount}</Text>
+
+            </View>
+        )});
+    const txHistory = profileInfo.txHistory.map((data) => {
         return (
             <View style={styles.trades}>
             <View style={styles.horizontal}>
-            <Image source={require('../assets/bid.png')} style={styles.coinLogo}></Image>
+            <Image source={require('../assets/tx.png')} style={styles.coinLogo}></Image>
             <View>
-            <Text style={styles.tradeTitle}>New bid for ${data.amount}</Text>
-            <Text style={styles.tradeSUb}>From {data.user} for your NFT #{data.nft}</Text>
+            <Text style={styles.tradeTitle}>Amount {data.amount<0 ? "Credited":"Debited"}</Text>
+            <Text style={styles.tradeSUb}>${data.amount<0 ? data.amount*-1:data.amount} {data.amount>0 ? "received from":"transferred to"} account {data.acc}</Text>
             </View>
             </View>
             </View>
         )});
-        const sellHistory = profileInfo.tradeHistory.sales.map((data) => {
-            return (
-                <View style={styles.trades}>
-                <View style={styles.horizontal}>
-                <Image source={require('../assets/sold.png')} style={styles.coinLogo}></Image>
-                <View>
-                <Text style={styles.tradeTitle}>NFT sold for ${data.amount}</Text>
-                <Text style={styles.tradeSUb}>NFT #{data.nft} sold to {data.user}</Text>
-                </View>
-                </View>
-                </View>
-            )});
-
-        const purchaseHistory = profileInfo.tradeHistory.purchases.map((data) => {
-            return (
-                <View style={styles.trades}>
-                <View style={styles.horizontal}>
-                <Image source={require('../assets/sold.png')} style={styles.coinLogo}></Image>
-                <View>
-                <Text style={styles.tradeTitle}>NFT purchased for ${data.amount}</Text>
-                <Text style={styles.tradeSUb}>NFT ID #{data.nft}</Text>
-                </View>
-                </View>
-                </View>
-            )});
         
 
     
@@ -68,41 +63,55 @@ export default function Trade() {
        
            <View style={{marginTop:'15%'}}></View>
         
-            <Text style={styles.title}>Trade History</Text>
-            <View style={{height:'75%'}}>
-            <ScrollView style={{paddingBottom:'10%'}}>
-            <Text style={styles.titlesub}>Bids</Text>
-            <View style={{height:'30%'}}>
-                <ScrollView style={{overflow:'hidden', paddingBottom:'5%'}}>
-                {bidHistory}
+            <TouchableOpacity><View style={styles.horizontal}>
+            <Text style={styles.title}>Wallet</Text>
+            <Text style={styles.link}>View All</Text>
+            </View></TouchableOpacity>
+            <View style={styles.horizontal}>
+                <ScrollView horizontal={true} style={{overflow:'visible'}}>
+                {portfolio}
                 </ScrollView>
+            </View>
+         
+            <Text style={styles.title}>Total Balance</Text>
+            <View style={styles.horizontal}>
+            <View style={styles.total}><Text style={{fontSize:20, color:"#FFF", fontWeight:'bold', textAlign:'center', textAlignVertical:'center', marginTop:'5%'}}>${profileInfo.profileInfo.totalBalance.toString()}</Text></View>
+            <View style={{marginLeft:'5%'}}>
+                <Text style={styles.labeldrop}>Download statement for</Text>
+                <DropDownPicker
+                open={open}
+                value={value}
+                items={items}
+                setValue={setValue}
+                setItems={setItems}
+                setOpen={setOpen}
+                placeholder="Select duration"
+                placeholderStyle={{fontWeight:'bold', color:"#0553B9"}}
+                style={{borderColor:"#FFF", height:40}}
+                labelStyle={{color:"#0553B9", fontWeight:'bold'}}
+                containerStyle={{height:50, width:'50%', borderColor:'#FFF', zIndex:3}}
+                />
+            </View>
+            <Icon name="download" type="feather" color="#0553B9" size={30}></Icon>
             </View>
 
-            <Text style={styles.titlesub}>Sales</Text>
-            <View style={{height:'30%'}}>
+            <Text style={styles.title}>Recent Transactions</Text>
+            <View style={{height:'36.5%'}}>
                 <ScrollView style={{overflow:'hidden', paddingBottom:'5%'}}>
-                {sellHistory}
+                {txHistory}
                 </ScrollView>
             </View>
-
-            <Text style={styles.titlesub}>Purchases</Text>
-            <View style={{height:'33.5%'}}>
-                <ScrollView style={{overflow:'hidden', paddingBottom:'5%'}}>
-                {purchaseHistory}
-                </ScrollView>
-            </View>
-            </ScrollView>
-            </View>     
+               
         </View>
         <View style={styles.footer}>
                     <View style={{justifyContent:'space-between', flexDirection:'row'}}>
                     <TouchableOpacity onPress={()=>navigation.navigate('Home')}><View>
-                    <Icon name="home" type="entypo" color="#0553B9"></Icon>
-                    <Text style={styles.label}>Home</Text>
+                    <Icon name="home" type="entypo" color="#A6A9B4"></Icon>
+                    <Text style={styles.labelInactive}>Home</Text>
                     </View></TouchableOpacity>
                     <TouchableOpacity  onPress={()=>navigation.navigate('Wallet')}><View>
-                    <Icon name="wallet" type="entypo" color="#A6A9B4"></Icon>
-                    <Text style={styles.labelInactive}>Wallet</Text>
+                    <Icon name="wallet" type="entypo" color="#0553B9"></Icon>
+                    <Text style={styles.label}>Wallet</Text>
                     </View></TouchableOpacity>
                     <TouchableOpacity  onPress={()=>navigation.navigate('Discover')}><View>
                     <Icon name="search" type="feather" color="#A6A9B4"></Icon>
@@ -113,7 +122,7 @@ export default function Trade() {
                     <Text style={styles.labelInactive}>Notifications</Text>
                     </View></TouchableOpacity>
                 </View>
-            </View>   
+            </View>  
         </View>
     );
 
@@ -141,16 +150,6 @@ const styles = StyleSheet.create({
         fontSize:25,
         textAlign:'left',
         flexWrap:'wrap',
-    },
-    titlesub: {
-        fontFamily:'Roboto',
-        color:"#0553B9",
-        fontWeight:'bold',
-        fontSize:20,
-        textAlign:'left',
-        flexWrap:'wrap',
-        marginLeft:'5%',
-        marginTop:'2.5%'
     },
     subtitle: {
         fontFamily:'Roboto',
@@ -208,6 +207,13 @@ const styles = StyleSheet.create({
         textAlign:'center',
         flexWrap:'wrap',
     },
+    labeldrop: {
+        fontFamily:'Roboto',
+        color:"#0553B9",
+        fontWeight:'bold',
+        fontSize:12,
+        textAlign:'left',
+    },
     labelInactive: {
         fontFamily:'Roboto',
         color:"#A6A9B4",
@@ -222,8 +228,8 @@ const styles = StyleSheet.create({
         paddingHorizontal:'5%',
         paddingVertical:'5%',
         alignContent:'center',
-        width:150,
-        height:175,
+        width:125,
+        height:150,
         marginHorizontal:10,
         marginVertical:10,
     },
@@ -274,7 +280,28 @@ const styles = StyleSheet.create({
         textAlign:'left',
         flexWrap:'wrap',
         marginLeft:'5%',
-        width:'70%'
+        width:'90%'
     },
+    link: {
+        fontFamily:'Roboto',
+        color:"#0553B9",
+        fontWeight:'bold',
+        fontSize:15,
+        textAlign:'right',
+        textAlignVertical:'bottom',
+        textDecorationLine:'underline',
+        position:'absolute',
+        right:0
+    },
+    total: {
+        backgroundColor:"#d9dadb",
+        color:"#FFF",
+        borderRadius:20,
+        paddingHorizontal:'5%',
+        paddingVertical:'2.5%',
+        width:'40%',
+        height:60,
+        alignContent:'center'
+    }
 
 });
