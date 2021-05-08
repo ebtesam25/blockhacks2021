@@ -48,7 +48,7 @@ export default function Purchase({route}) {
                 
             </View>
             </View>
-            <TouchableOpacity onPress={()=>navigation.navigate('Purchased',{data:data})}><View style={styles.btn}>
+            <TouchableOpacity onPress={()=>navigation.navigate('Purchased',{data:data,type:'new'})}><View style={styles.btn}>
                 <Text style={{color:"#FFF", fontWeight:'bold', textAlign:'center'}}>Confirm Purchase</Text>
             </View></TouchableOpacity>
             </View>

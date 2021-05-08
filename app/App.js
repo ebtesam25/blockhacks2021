@@ -13,6 +13,8 @@ import Purchase from './src/screens/purchase';
 import Purchased from './src/screens/purchased';
 import Splash from './src/screens/splash';
 import Create from './src/screens/create';
+import Published from './src/screens/published';
+import Sell from './src/screens/sell';
 
 const Stack = createStackNavigator();
 
@@ -66,6 +68,16 @@ function MyStack() {
       <Stack.Screen 
         name="Create" 
         component={Create} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Published" 
+        component={Published} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Sell" 
+        component={Sell} 
         options={{ headerShown: false}} 
       />
       

@@ -62,7 +62,7 @@ export default function Home() {
                 </View></TouchableOpacity>
             </View>
             <View style={styles.create}>
-                <TouchableOpacity><View style={styles.horizontal}>
+                <TouchableOpacity onPress={()=>navigation.navigate('Sell')}><View style={styles.horizontal}>
                     <Icon name="shopping-basket-add" type="fontisto" color="#0553B9" size={30}></Icon>
                     <Text style={styles.createlabel}>Sell existing NFT</Text>
                 </View></TouchableOpacity>
