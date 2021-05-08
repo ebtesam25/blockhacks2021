@@ -79,7 +79,7 @@ export default function Wallet() {
             <Text style={styles.title}>Total Balance</Text>
             <View style={styles.horizontal}>
             <View style={styles.total}><Text style={{fontSize:20, color:"#FFF", fontWeight:'bold', textAlign:'center', textAlignVertical:'center', marginTop:'5%'}}>${balance ? "*****" : profileInfo.profileInfo.totalBalance.toString()}</Text></View>
-            <TouchableOpacity onPress={()=>{ balance ? dispatch(lock()): dispatch(unlock())}}><View style={styles.btn}><Text style={{fontSize:20, color:"#FFF", fontWeight:'bold', textAlign:'center', textAlignVertical:'center', marginTop:'5%'}}>{balance ? "Unlock":"Lock"}</Text></View></TouchableOpacity>
+            <TouchableOpacity onPress={()=>{ navigation.navigate('Unlock')}}><View style={styles.btn}><Text style={{fontSize:20, color:"#FFF", fontWeight:'bold', textAlign:'center', textAlignVertical:'center', marginTop:'5%'}}>{balance ? "Unlock":"Lock"}</Text></View></TouchableOpacity>
             </View>
             <View style={{flexDirection:'row', marginTop:'5%'}}>
             <View style={{marginLeft:'5%'}}>

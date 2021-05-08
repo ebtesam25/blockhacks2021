@@ -5631,6 +5631,15 @@ react-native-communications@^2.2.1:
   resolved "https://registry.yarnpkg.com/react-native-communications/-/react-native-communications-2.2.1.tgz#7883b56b20a002eeb790c113f8616ea8692ca795"
   integrity sha1-eIO1ayCgAu63kMET+GFuqGksp5U=
 
+react-native-drax@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-drax/-/react-native-drax-0.8.0.tgz#249974c45cd2a15d9b68962770ae78e8005e3eac"
+  integrity sha512-NLqXh9aqnclVjRjEXsu/unocDcddCtXt5oVA1pVJ5DxqWw7gl1ZckSnMwxohEVKXG2ig477zuTt+1aBUOvVsPw==
+  dependencies:
+    lodash.isequal "^4.5.0"
+    lodash.throttle "^4.1.1"
+    typesafe-actions "^5.1.0"
+
 react-native-dropdown-picker@^5.1.4:
   version "5.1.4"
   resolved "https://registry.yarnpkg.com/react-native-dropdown-picker/-/react-native-dropdown-picker-5.1.4.tgz#eab64fe1741ed6e12ebc41821077d7a4e793b363"
@@ -6648,6 +6657,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typesafe-actions@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/typesafe-actions/-/typesafe-actions-5.1.0.tgz#9afe8b1e6a323af1fd59e6a57b11b7dd6623d2f1"
+  integrity sha512-bna6Yi1pRznoo6Bz1cE6btB/Yy8Xywytyfrzu/wc+NFW3ZF0I+2iCGImhBsoYYCOWuICtRO4yHcnDlzgo1AdNg==
 
 ua-parser-js@^0.7.18:
   version "0.7.28"

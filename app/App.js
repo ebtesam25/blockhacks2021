@@ -21,6 +21,7 @@ import CompleteProfile from './src/screens/completeProfile';
 import Personal from './src/screens/personal';
 import Payment from './src/screens/payment';
 import Completed from './src/screens/onboardingComplete';
+import Unlock from './src/screens/unlock';
 
 const Stack = createStackNavigator();
 
@@ -79,6 +80,11 @@ function MyStack() {
       <Stack.Screen 
         name="Wallet" 
         component={Wallet} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Unlock" 
+        component={Unlock} 
         options={{ headerShown: false}} 
       />
       <Stack.Screen 
