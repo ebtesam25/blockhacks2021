@@ -49,14 +49,14 @@ export default function Home() {
             <View style={styles.horizontal}>
                 <View>
                 <Text style={styles.title}>NFTZ</Text>
-                <Text style={styles.subtitle}>{balance ? "WALLET LOCKED" : profileInfo.profileInfo.totalBalance}</Text>
+                <Text style={styles.subtitle}>{balance ? "Wallet Locked" : profileInfo.profileInfo.totalBalance}</Text>
 
                 </View>
                 <Image style={styles.avatar} source={{uri:profileInfo.profileInfo.imgurl}}></Image>
             </View>
             <View style={styles.horizontal}>
             <View style={styles.create}>
-                <TouchableOpacity><View style={styles.horizontal}>
+                <TouchableOpacity onPress={()=>navigation.navigate('Create')}><View style={styles.horizontal}>
                 <Icon name="pluscircle" type="antdesign" color="#0553B9" style={{marginTop:'10%'}} size={40}></Icon>
                     <Text style={styles.createlabel}>Create an NFT</Text>
                 </View></TouchableOpacity>
@@ -135,6 +135,15 @@ const styles = StyleSheet.create({
         fontSize:25,
         textAlign:'left',
         flexWrap:'wrap',
+    },
+    tlogo: {
+        fontFamily:'Roboto',
+        color:"#0553B9",
+        fontWeight:'bold',
+        fontSize:25,
+        textAlign:'left',
+        marginLeft:'5%',
+        letterSpacing:-7
     },
     subtitle: {
         fontFamily:'Roboto',

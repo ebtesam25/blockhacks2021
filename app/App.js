@@ -11,6 +11,8 @@ import Discover from './src/screens/discover';
 import Nft from './src/screens/nft';
 import Purchase from './src/screens/purchase';
 import Purchased from './src/screens/purchased';
+import Splash from './src/screens/splash';
+import Create from './src/screens/create';
 
 const Stack = createStackNavigator();
 
@@ -20,6 +22,11 @@ function MyStack() {
     <Stack.Navigator
       initialRouteName="Splash"
     >
+      <Stack.Screen 
+        name="Splash" 
+        component={Splash} 
+        options={{ headerShown: false}} 
+      />
   
       <Stack.Screen 
         name="Home" 
@@ -56,7 +63,11 @@ function MyStack() {
         component={Purchased} 
         options={{ headerShown: false}} 
       />
-      
+      <Stack.Screen 
+        name="Create" 
+        component={Create} 
+        options={{ headerShown: false}} 
+      />
       
       
     </Stack.Navigator>

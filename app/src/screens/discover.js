@@ -31,15 +31,7 @@ export default function Discover() {
     
 
 
-    const portfolio = profileInfo.portfolio.map((data) => {
-        return (
-            <View style={styles.coins}>
-            <Image source={{uri:`https://cryptologos.cc/logos/${data.currency}-${data.symbol.toLowerCase()}-logo.png?v=010`}} style={styles.coinLogo}></Image>
-            <Text style={styles.coinLabel}>{data.symbol}</Text>
-            <Text style={styles.coinAmount}>{data.amount}</Text>
 
-            </View>
-        )});
     const nfts = nft.nfts.map((data) => {
         return (
             <View style={styles.trades}>

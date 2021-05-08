@@ -5,6 +5,6 @@ export const walletReducer = (state=false, action) =>{
     case 'UNLOCK':
     return state =true;
     default:
-    return state;
+    return false;
     }
     }
