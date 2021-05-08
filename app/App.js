@@ -16,6 +16,10 @@ import Create from './src/screens/create';
 import Published from './src/screens/published';
 import Sell from './src/screens/sell';
 import Login from './src/screens/login';
+import Register from './src/screens/register';
+import CompleteProfile from './src/screens/completeProfile';
+import Personal from './src/screens/personal';
+import Payment from './src/screens/payment';
 
 const Stack = createStackNavigator();
 
@@ -33,6 +37,26 @@ function MyStack() {
       <Stack.Screen 
         name="Login" 
         component={Login} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Register" 
+        component={Register} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="CompleteProfile" 
+        component={CompleteProfile} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Personal" 
+        component={Personal} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Payment" 
+        component={Payment} 
         options={{ headerShown: false}} 
       />
   
@@ -86,6 +110,8 @@ function MyStack() {
         component={Sell} 
         options={{ headerShown: false}} 
       />
+      
+      
       
       
     </Stack.Navigator>
