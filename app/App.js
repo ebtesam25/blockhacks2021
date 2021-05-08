@@ -20,6 +20,7 @@ import Register from './src/screens/register';
 import CompleteProfile from './src/screens/completeProfile';
 import Personal from './src/screens/personal';
 import Payment from './src/screens/payment';
+import Completed from './src/screens/onboardingComplete';
 
 const Stack = createStackNavigator();
 
@@ -57,6 +58,11 @@ function MyStack() {
       <Stack.Screen 
         name="Payment" 
         component={Payment} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Completed" 
+        component={Completed} 
         options={{ headerShown: false}} 
       />
   
