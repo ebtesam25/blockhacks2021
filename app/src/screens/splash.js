@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, Button, ImageBackground, Linking } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Svg, { Line } from 'react-native-svg';
 import { Icon } from 'react-native-elements'
 import { TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { SearchBar } from 'react-native-elements';
+import {useSelector, useDispatch} from 'react-redux'
+import {increment,decrement, lock, unlock} from '../store/action'
+
+
 
 
 
 
 export default function Splash() {
     const navigation = useNavigation();
+    const dispatch = useDispatch();
+
+
  
     return (
         <View style={styles.contain}>
@@ -24,7 +30,7 @@ export default function Splash() {
            <Text style={{backgroundColor:"#0553B9", height:200, color:"#FFF", fontWeight:'bold', width:200,
            alignSelf:'center', textAlign:'center', borderRadius:200, textAlignVertical:'center', letterSpacing:-8, fontSize:30}}>NFTZ</Text>
            <View style={{marginTop:'50%'}}></View>
-            <TouchableOpacity onPress={()=>navigation.navigate('Home')}><View style={styles.btn}>
+            <TouchableOpacity onPress={()=>{dispatch(lock());navigation.navigate('Login');}}><View style={styles.btn}>
                 <Text style={{color:"#FFF", fontWeight:'bold', textAlign:'center'}}>Continue</Text>
             </View></TouchableOpacity>
                

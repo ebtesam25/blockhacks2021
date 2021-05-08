@@ -15,6 +15,7 @@ import Splash from './src/screens/splash';
 import Create from './src/screens/create';
 import Published from './src/screens/published';
 import Sell from './src/screens/sell';
+import Login from './src/screens/login';
 
 const Stack = createStackNavigator();
 
@@ -27,6 +28,11 @@ function MyStack() {
       <Stack.Screen 
         name="Splash" 
         component={Splash} 
+        options={{ headerShown: false}} 
+      />
+      <Stack.Screen 
+        name="Login" 
+        component={Login} 
         options={{ headerShown: false}} 
       />
   

@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function Trade() {
     const navigation = useNavigation();
-    const [profileInfo, setProfile] = useState({"profileInfo":{"imgurl":"https://i.pinimg.com/originals/51/f6/fb/51f6fb256629fc755b8870c801092942.png","totalBalance":20},
+    const [profileInfo, setProfile] = useState({"profileInfo":{"imgurl":"https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=644&q=80","totalBalance":20},
     "portfolio":[{"currency":"bitcoin","symbol":"BTC","amount":1000},{"currency":"ethereum","symbol":"ETH","amount":2000},{"currency":"xrp","symbol":"XRP","amount":7000},],
     "tradeHistory":{"bids":[{"amount":1340,"user":"elonmusk#01","nft":"34532"},{"amount":1140,"user":"johndoe#01","nft":"34532"}],"sales":[{"amount":11000,"user":"elonmusk#01","nft":"34532"},{"amount":1000,"user":"johndoe#01","nft":"34532"}],"purchases":[{"amount":1100,"nft":"34532"},{"amount":1400,"nft":"342432"}]}});
 
@@ -168,7 +168,9 @@ const styles = StyleSheet.create({
         width:50,
         resizeMode:'cover',
         position:'absolute',
-        right:0
+        right:0,
+        borderRadius:20,
+        
     },
     create: {
         backgroundColor:'#FFF',
